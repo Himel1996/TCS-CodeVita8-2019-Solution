@@ -1,0 +1,198 @@
+//ITERATE BASE
+
+import java.io.*;
+import java.util.*;
+class Iterate
+{
+  static int base(String str)
+  {
+    int i;
+    int tmp=0;
+    int len=str.length();
+    for(i=len-1;i>0;i--)
+    {
+      if(str.charAt(i)>str.charAt(i-1))
+      {
+    	  if(Character.getNumericValue(str.charAt(i))>tmp)
+          tmp=Character.getNumericValue(str.charAt(i));
+      }
+      else
+      {
+        if(Character.getNumericValue(str.charAt(i-1))>tmp)
+          tmp=Character.getNumericValue(str.charAt(i-1));
+      }
+    }
+    if(tmp+1<=36)
+    return tmp+1;
+    else
+    {
+    	System.out.println("Base Constraint Exceeded");
+    	return -1;
+    }
+  }
+  public static boolean isNumeric(String str) { 
+	  try {  
+	    Integer.parseInt(str);  
+	    return true;
+	  } catch(NumberFormatException e){  
+	    return false;  
+	  }  
+	}
+  static int val(char c)
+  {
+    if(c>='0'&& c<='9')
+      return (int)c-'0';
+    else
+      return (int)c-'A'+10;
+  }
+  static int toDeci(String str, int b)
+  {
+    int len=str.length();
+    if(len>5)
+    {
+    	System.out.println("Length Constraint Exceeded");
+    	return -1;
+    }
+    else
+    {
+    int power=1;
+    int num=0;
+    int i, in;
+    if(isNumeric(str))
+    { in=Integer.parseInt(str);}
+    else
+    {
+    	String ini="";
+    	for(i=len-1;i>=0;i--)
+    	{
+    		char val=str.charAt(i);
+    		
+    	
+    	switch(val) {
+    	case '1':
+    		 ini+="1";
+    	case '2':
+    		 ini+="2";
+    	case '3':
+    		ini+="3";
+    	case '4':
+    		ini+="4";
+    	case '5':
+    		ini+="5";
+    	case '6':
+    		ini+="6";
+    	case '7':
+    		ini+="7";
+    	case '8':
+    		ini+="8";
+    	case '9':
+    		ini+="9";
+    	case 'A':
+    		 ini+="10";
+    		break;
+    	case 'B':
+    		 ini+="11";
+    		break;
+    	case 'C':
+    		 ini+="12";
+    		break;
+    	case 'D':
+    		 ini+="13";
+    		break;
+    	case 'E':
+    		 ini+="14";
+    		break;
+    	case 'F':
+    		 ini+="15";
+    		break;
+    	case 'G':
+    		 ini+="16";
+    		break;
+    	case 'H':
+    		 ini+="17";
+    		break;
+    	case 'I':
+    		 ini+="18";
+    		break;
+    	case 'J':
+    		 ini+="19";
+    		break;
+    	case 'K':
+    		 ini+="20";
+    		break;
+    	case 'L':
+    		 ini+="21";
+    		break;
+    	case 'M':
+    		 ini+="22";
+    		break;
+    	case 'N':
+    		 ini+="23";
+    		break;
+    	case 'O':
+    		 ini+="24";
+    		break;
+    	case 'P':
+    		 ini+="25";
+    		break;
+    	case 'Q':
+    		 ini+="26";
+    		break;
+    	case 'R':
+    		 ini+="27";
+    		break;
+    	case 'S':
+    		 ini+="28";
+    		break;
+    	case 'T':
+    		 ini+="29";
+    		break;
+    	case 'U':
+    		 ini+="30";
+    		break;
+    	case 'V':
+    		 ini+="31";
+    		break;
+    	case 'W':
+    		 ini+="32";
+    		break;
+    	case 'X':
+    		 ini+="33";
+    		break;
+    	case 'Y':
+    		 ini+="34";
+    		break;
+    	case 'Z':
+    		 ini+="35";
+    		break;
+    	
+    	}
+    	}
+     in=Integer.parseInt(ini);
+    }
+    for(i=len-1;i>=0;i--)
+    {
+    	
+      num+=val(str.charAt(i))*power;
+      power=power*b;
+    }
+    if(num==in)
+      return num;
+    else
+    {
+     String str1=Integer.toString(num);
+    	int b1=base(str1);
+      return toDeci(str1, b1);
+    }
+    }
+  }
+  public static void main(String[] args)
+  {
+    Scanner sc=new Scanner(System.in);
+    String str=sc.nextLine();
+    int b=base(str);
+    
+    System.out.println(+toDeci(str, b));
+    
+  }
+}
